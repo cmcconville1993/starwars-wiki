@@ -6,24 +6,24 @@
 </template>
   
 <script>
-import axios from 'axios';
+
+import { GetCharacterByID } from '../services/character.service';
+
+
 export default {
+    props: {
+        characterId: String
+    },
     data() {
         return {
-            info: null
+            info: this.getCharacterByID()
         }
     },
-    mounted() {
-        axios
-            .get('https://breakingbadapi.com/api/characters/1')
-            .then(response => {
-                console.log('yupppaaaa')
-                this.info = response.data[0]
-                console.log(JSON.stringify(this.details))
-            })
+    methods: {
+        getCharacterByID() {
+            return GetCharacterByID(this.characterId);
+        }
     }
-
-
 }
 </script>
   
