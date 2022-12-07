@@ -1,4 +1,3 @@
-// import { flushPromises } from '@vue/test-utils'
 import axios from 'axios'
 import { GetCharacterByID, GetAllCharacters } from '../../src/services/character.service';
 import { MOCK_CHARACTER, MOCK_CHARACTER_LIST } from '../__mocks__/character'
@@ -18,7 +17,7 @@ test('Returns a list of all characters from API', async () => {
     })
 
     expect(axios.get).toHaveBeenCalledTimes(1)
-    expect(axios.get).toHaveBeenCalledWith('https://breakingbadapi.com/api/characters')
+    expect(axios.get).toHaveBeenCalledWith('https://breakingbadapi.com/api/characters/')
 })
 
 test('Return character by ID from API', async () => {
