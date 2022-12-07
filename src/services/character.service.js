@@ -1,19 +1,38 @@
 import axios from 'axios';
 
-export function GetAllCharacters() {
-    return axios
-        .get('https://breakingbadapi.com/api/characters');
-}
+const BREAKING_BAD_CHARACTERS_ENDPOINT = 'https://breakingbadapi.com/api/characters/'
 
-export async function GetCharacterByID(id) {
-    let response1;
+/**
+ * Return a list of all characters
+ */
+export async function GetAllCharacters() {
+    let allCharacters = [];
     await axios
-        .get('https://breakingbadapi.com/api/characters/' + id)
+        .get(BREAKING_BAD_CHARACTERS_ENDPOINT)
         .then(response => {
-            response.data
-            response1 = response.data[0]
+            allCharacters = response.data
+            console.log(allCharacters)
         })
         .catch(err => err)
 
-    return response1;
+    return allCharacters;
+}
+
+/**
+ * Used to get a character by ID
+ * 
+ * @param {*} id 
+ * @returns character by ID
+ */
+export async function GetCharacterByID(id) {
+    let character;
+    await axios
+        .get(BREAKING_BAD_CHARACTERS_ENDPOINT + id)
+        .then(response => {
+            response.data
+            character = response.data[0]
+        })
+        .catch(err => err)
+
+    return character;
 }
