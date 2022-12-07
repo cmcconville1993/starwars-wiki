@@ -17,7 +17,7 @@ test('Returns a list of all characters from API', async () => {
     })
 
     expect(axios.get).toHaveBeenCalledTimes(1)
-    expect(axios.get).toHaveBeenCalledWith('https://breakingbadapi.com/api/characters')
+    expect(axios.get).toHaveBeenCalledWith('https://breakingbadapi.com/api/characters/')
 })
 
 test('Return character by ID from API', async () => {
