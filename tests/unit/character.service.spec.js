@@ -1,4 +1,3 @@
-// import { flushPromises } from '@vue/test-utils'
 import axios from 'axios'
 import { GetCharacterByID, GetAllCharacters } from '../../src/services/character.service';
 import { MOCK_CHARACTER, MOCK_CHARACTER_LIST } from '../__mocks__/character'
