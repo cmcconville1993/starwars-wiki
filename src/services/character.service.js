@@ -11,7 +11,6 @@ export async function GetAllCharacters() {
         .get(BREAKING_BAD_CHARACTERS_ENDPOINT)
         .then(response => {
             allCharacters = response.data
-            console.log(allCharacters)
         })
         .catch(err => err)
 
@@ -29,7 +28,6 @@ export async function GetCharacterByID(id) {
     await axios
         .get(BREAKING_BAD_CHARACTERS_ENDPOINT + id)
         .then(response => {
-            response.data
             character = response.data[0]
         })
         .catch(err => err)
