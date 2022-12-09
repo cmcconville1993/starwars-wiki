@@ -1,5 +1,69 @@
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons" />
 <template>
     <div>
+        <form novalidate class="md-layout" @submit.prevent="validateAndSubmit">
+            <md-card-content>
+                <md-card-header>
+                    <div class="md-title">Feedback</div>
+                </md-card-header>
+
+                <div class="md-layout">
+                    <div class="md-layout-item md-small-size-100">
+                        <md-field :class="getValidationClass('name')">
+                            <label for="name">Name:</label>
+                            <md-input name="name" id="name" autocomplete="given-name" v-model="form.name"
+                                :disabled="sending" />
+                            <span class="md-error" v-if="!$v.form.name.required">Name required</span>
+                            <span class="md-error" v-else-if="!$v.form.name.minlength">Invalid name</span>
+                        </md-field>
+                    </div>
+                </div>
+
+                <div class="md-layout">
+                    <md-field :class="getValidationClass('dateWatched')">
+                        <label for="dateWatched">Date watched:</label>
+                        <md-datepicker name="dateWatched" id="dateWatched" v-model="form.dateWatched"
+                            :disabled="sending" />
+                        <span class="md-error" v-if="!$v.form.dateWatched.required">Date Watched required</span>
+                    </md-field>
+                </div>
+
+                <div class="md-layout md-gutter">
+                    <div class="md-layout-item md-small-size-100">
+                        <md-field :class="getValidationClass('review')">
+                            <label for="review">Review:</label>
+                            <md-textarea name="review" id="review" v-model="form.review" :disabled="sending" />
+                            <span class="md-error" v-if="!$v.form.review.required">Review required</span>
+                        </md-field>
+                    </div>
+                </div>
+
+                <div class="md-layout md-gutter">
+                    <div class="md-layout-item md-small-size-100">
+                        <md-field :class="getValidationClass('rating')">
+                            <label for="rating">Rating:</label>
+                            <md-select name="rating" id="rating" v-model="form.rating" :disabled="sending">
+                                <md-option value="1">1</md-option>
+                                <md-option value="2">2</md-option>
+                                <md-option value="3">3</md-option>
+                                <md-option value="4">4</md-option>
+                                <md-option value="5">5</md-option>
+                            </md-select>
+                            <span class="md-error" v-if="!$v.form.rating.required">Review required</span>
+                        </md-field>
+                    </div>
+                </div>
+
+                <!-- <md-progress-bar md-mode="indeterminate" v-if="sending" /> -->
+
+                <md-card-actions>
+                    <md-button @click="clearForm" id="clearBtn" class="md-secondary"
+                        :disabled="sending">Clear</md-button>
+                    <md-button type="submit" class="md-primary" :disabled="sending">Submit review</md-button>
+                </md-card-actions>
+            </md-card-content>
+
+        </form>
     </div>
 </template>
   
@@ -7,10 +71,9 @@
 import { validationMixin } from 'vuelidate'
 import {
     required,
-    // email,
     minLength,
-    maxLength
 } from 'vuelidate/lib/validators'
+import { AddCharacterReview } from '../services/review.service';
 
 export default {
     props: {
@@ -19,29 +82,24 @@ export default {
     mixins: [validationMixin],
     data: () => ({
         form: {
-            firstName: null,
-            lastName: null,
-            gender: null,
-            age: null,
-            email: null,
+            name: null,
+            dateWatched: null,
+            review: null,
+            rating: null,
         },
         userSaved: false,
-        sending: false,
-        lastUser: null
+        sending: false
     }),
     validations: {
         form: {
             name: {
                 required,
-                minLength: minLength(3)
             },
             dateWatched: {
-                required,
-                minLength: minLength(3)
+                required
             },
             review: {
-                required,
-                maxLength: maxLength(3)
+                required
             },
             rating: {
                 required
@@ -49,6 +107,33 @@ export default {
         }
     },
     methods: {
+        getValidationClass(fieldName) {
+            const field = this.$v.form[fieldName]
+
+            if (field) {
+                return {
+                    'md-invalid': field.$invalid && field.$dirty
+                }
+            }
+        },
+        validateAndSubmit() {
+            this.$v.$touch()
+
+            if (!this.$v.$invalid) {
+                this.submit()
+            }
+        },
+        submit() {
+            return AddCharacterReview(this.form.name, this.form.dateWatched,
+                this.form.review, this.form.rating)
+        },
+        clearForm() {
+            this.$v.$reset()
+            this.form.name = null
+            this.form.rating = null
+            this.form.review = null
+            this.form.dateWatched = null
+        }
     }
 }
 </script>

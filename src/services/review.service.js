@@ -10,6 +10,6 @@ export async function AddCharacterReview(rName, rDateWatched, rReview, rRating) 
 
     return await axios
         .post(BREAKING_BAD_REVIEWS_ENDPOINT, review)
-        .then(response => { response.data; console.log('Success') })
-        .catch(err => { err; console.log('Error') })
+        .then(response => response.data)
+        .catch(err => err)
 }
