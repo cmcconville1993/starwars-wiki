@@ -4,7 +4,7 @@ import { MOCK_CHARACTER, MOCK_CHARACTER_LIST } from '../__mocks__/character'
 
 
 test('Returns a list of all characters from API', async () => {
-    jest.spyOn(axios, 'get').mockResolvedValue({ status: 200, data: MOCK_CHARACTER_LIST })
+    jest.spyOn(axios, 'get').mockResolvedValue({ status: 201, data: MOCK_CHARACTER_LIST })
 
     await GetAllCharacters().then(response => {
         expect(response).toHaveLength(3)
@@ -21,7 +21,7 @@ test('Returns a list of all characters from API', async () => {
 })
 
 test('Return character by ID from API', async () => {
-    jest.spyOn(axios, 'get').mockResolvedValue({ status: 200, data: MOCK_CHARACTER })
+    jest.spyOn(axios, 'get').mockResolvedValue({ status: 201, data: MOCK_CHARACTER })
 
     await GetCharacterByID(1).then(response => {
         expect(response.id).toEqual(1)
@@ -31,7 +31,3 @@ test('Return character by ID from API', async () => {
     expect(axios.get).toHaveBeenCalledTimes(1)
     expect(axios.get).toHaveBeenCalledWith('https://breakingbadapi.com/api/characters/1')
 })
-
-afterEach(() => {
-    jest.clearAllMocks();
-});

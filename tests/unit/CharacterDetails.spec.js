@@ -4,7 +4,7 @@ import CharacterDetails from '@/components/CharacterDetails.vue'
 
 jest.spyOn(CharacterDetails.methods, 'getCharacterByID').mockResolvedValue(MOCK_CHARACTER)
 
-test('stores ID when passed into props', () => {
+test('stores character ID when passed into props', () => {
     const characterId = "123"
     const wrapper = shallowMount(CharacterDetails, {
         propsData: { characterId }
