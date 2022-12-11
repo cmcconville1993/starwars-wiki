@@ -182,8 +182,3 @@ test('submitReview - unsuccessful - no rating provided', () => {
     expect(spy).not.toHaveBeenCalled()
     expect(wrapper.vm.apiResponseInfo).toBeNull()
 })
-
-// Global way to do this? 
-afterEach(() => {
-    jest.clearAllMocks();
-});

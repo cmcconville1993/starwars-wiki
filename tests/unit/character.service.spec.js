@@ -31,7 +31,3 @@ test('Return character by ID from API', async () => {
     expect(axios.get).toHaveBeenCalledTimes(1)
     expect(axios.get).toHaveBeenCalledWith('https://breakingbadapi.com/api/characters/1')
 })
-
-afterEach(() => {
-    jest.clearAllMocks();
-});

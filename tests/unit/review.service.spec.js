@@ -33,7 +33,3 @@ test('Add character reviews - unsuccessful', async () => {
     expect(axios.post).toHaveBeenCalledTimes(1)
     expect(axios.post).toHaveBeenCalledWith('https://breakingbadapi.com/api/reviews/', expectedBody)
 })
-
-afterEach(() => {
-    jest.clearAllMocks();
-});
