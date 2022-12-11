@@ -8,7 +8,7 @@ test('Add character reviews - successful', async () => {
 
     //Action
     await AddCharacterReview('test-name', 'test-date-watched', 'test-review', 'test-rating').then(response => {
-        // expect(response).toHaveLength(3)
+        expect(response).toEqual({ "status": 201 })
     })
 
     //Assert
@@ -24,7 +24,7 @@ test('Add character reviews - unsuccessful', async () => {
 
     //Action
     await AddCharacterReview('test-name', 'test-date-watched', 'test-review', 'test-rating').then(response => {
-        // expect(response).toHaveLength(3)
+        expect(response).toEqual({ "status": 500 })
     })
 
     //Assert

@@ -1,5 +1,6 @@
 import { mount, shallowMount } from '@vue/test-utils'
 import ReviewForm from '@/components/ReviewForm.vue'
+import * as ReviewService from '@/services/review.service';
 
 //Needed, bug 
 //https://github.com/vuematerial/vue-material/issues/695
@@ -20,7 +21,6 @@ test('Clear form', () => {
     //Arrange
     const wrapper = mount(ReviewForm, {
         propsData: { characterId: "123" },
-        // mixins: [validationMixin],
         data: () => ({
             form: {
                 name: 'test-name',
@@ -42,8 +42,8 @@ test('Clear form', () => {
 })
 
 test('submitReview - successful', async () => {
-    //Arrange
-    const spy = jest.spyOn(ReviewForm.methods, 'submit')
+    const spy = jest.spyOn(ReviewService, 'AddCharacterReview')
+        .mockResolvedValue({ status: 201 })
 
     const wrapper = shallowMount(ReviewForm, {
         propsData: { characterId: "123" },
@@ -58,14 +58,37 @@ test('submitReview - successful', async () => {
     })
 
     //Action
-    wrapper.find('form').trigger('submit')
+    await wrapper.find('form').trigger('submit')
 
     //Assert
     expect(spy).toHaveBeenCalledTimes(1)
+    expect(spy).toHaveBeenCalledWith('test-name', '2021-12-12', 'test-review', 5)
+    expect(wrapper.vm.isModalVisible).toEqual(true)
 })
 
 test('submitReview - unsuccessful - API Issue', async () => {
-    throw new Error('Not Implemented')
+    const spy = jest.spyOn(ReviewService, 'AddCharacterReview')
+        .mockRejectedValue({ status: 500 })
+
+    const wrapper = shallowMount(ReviewForm, {
+        propsData: { characterId: "123" },
+        data: () => ({
+            form: {
+                name: 'test-name',
+                dateWatched: '2021-12-12',
+                review: 'test-review',
+                rating: 5,
+            }
+        })
+    })
+
+    //Action
+    await wrapper.find('form').trigger('submit')
+
+    //Assert
+    expect(spy).toHaveBeenCalledTimes(1)
+    expect(spy).toHaveBeenCalledWith('test-name', '2021-12-12', 'test-review', 5)
+    expect(wrapper.vm.isModalVisible).toEqual(true)
 })
 
 test('submitReview - unsuccessful - no name provided', () => {

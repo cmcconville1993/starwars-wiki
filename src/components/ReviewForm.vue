@@ -49,12 +49,10 @@
                                 <md-option value="4">4</md-option>
                                 <md-option value="5">5</md-option>
                             </md-select>
-                            <span class="md-error" v-if="!$v.form.rating.required">Review required</span>
+                            <span class="md-error" v-if="!$v.form.rating.required">Rating required</span>
                         </md-field>
                     </div>
                 </div>
-
-                <!-- <md-progress-bar md-mode="indeterminate" v-if="sending" /> -->
 
                 <md-card-actions>
                     <md-button @click="clearForm" id="clearBtn" class="md-secondary"
@@ -64,6 +62,9 @@
             </md-card-content>
 
         </form>
+
+        <!-- Modal -->
+        <ErrorDialog v-show="isModalVisible" @close="closeModal" header="Test new header CMC" />
     </div>
 </template>
   
@@ -71,15 +72,18 @@
 import { validationMixin } from 'vuelidate'
 import {
     required,
-    minLength,
 } from 'vuelidate/lib/validators'
 import { AddCharacterReview } from '../services/review.service';
+import ErrorDialog from '@/components/ErrorDialog.vue';
 
 export default {
     props: {
         characterId: String
     },
     mixins: [validationMixin],
+    components: {
+        ErrorDialog
+    },
     data: () => ({
         form: {
             name: null,
@@ -88,12 +92,13 @@ export default {
             rating: null,
         },
         userSaved: false,
-        sending: false
+        sending: false,
+        isModalVisible: false
     }),
     validations: {
         form: {
             name: {
-                required,
+                required
             },
             dateWatched: {
                 required
@@ -123,9 +128,14 @@ export default {
                 this.submit()
             }
         },
-        submit() {
-            return AddCharacterReview(this.form.name, this.form.dateWatched,
-                this.form.review, this.form.rating)
+        async submit() {
+            await AddCharacterReview(this.form.name, this.form.dateWatched,
+                this.form.review, this.form.rating).then(() => {
+                    this.showModal()
+                    this.clearForm()
+                }).catch(() => {
+                    this.showModal()
+                })
         },
         clearForm() {
             this.$v.$reset()
@@ -133,8 +143,19 @@ export default {
             this.form.rating = null
             this.form.review = null
             this.form.dateWatched = null
+        },
+        showModal() {
+            this.isModalVisible = true;
+        },
+        closeModal() {
+            this.isModalVisible = false;
         }
     }
 }
+
 </script>
+
+<style scoped>
+
+</style>
   
