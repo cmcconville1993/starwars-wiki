@@ -4,7 +4,7 @@ import { AddCharacterReview } from '../../src/services/review.service';
 
 test('Add character reviews - successful', async () => {
     //Arrange
-    jest.spyOn(axios, 'post').mockResolvedValue({ status: 200 })
+    jest.spyOn(axios, 'post').mockResolvedValue({ status: 201 })
 
     //Action
     await AddCharacterReview('test-name', 'test-date-watched', 'test-review', 'test-rating').then(response => {
@@ -20,7 +20,7 @@ test('Add character reviews - successful', async () => {
 
 test('Add character reviews - unsuccessful', async () => {
     //Arrange
-    jest.spyOn(axios, 'post').mockRejectedValue({ status: 500 })
+    jest.spyOn(axios, 'post').mockResolvedValue({ status: 500 })
 
     //Action
     await AddCharacterReview('test-name', 'test-date-watched', 'test-review', 'test-rating').then(response => {

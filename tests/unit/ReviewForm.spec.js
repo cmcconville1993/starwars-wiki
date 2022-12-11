@@ -64,6 +64,7 @@ test('submitReview - successful', async () => {
     expect(spy).toHaveBeenCalledTimes(1)
     expect(spy).toHaveBeenCalledWith('test-name', '2021-12-12', 'test-review', 5)
     expect(wrapper.vm.isModalVisible).toEqual(true)
+    expect(wrapper.vm.apiResponseInfo).toEqual("Review successfully added!")
 })
 
 test('submitReview - unsuccessful - API Issue', async () => {
@@ -89,6 +90,7 @@ test('submitReview - unsuccessful - API Issue', async () => {
     expect(spy).toHaveBeenCalledTimes(1)
     expect(spy).toHaveBeenCalledWith('test-name', '2021-12-12', 'test-review', 5)
     expect(wrapper.vm.isModalVisible).toEqual(true)
+    expect(wrapper.vm.apiResponseInfo).toEqual("Error submitting character review...")
 })
 
 test('submitReview - unsuccessful - no name provided', () => {
@@ -111,6 +113,7 @@ test('submitReview - unsuccessful - no name provided', () => {
 
     //Assert
     expect(spy).not.toHaveBeenCalled()
+    expect(wrapper.vm.apiResponseInfo).toBeNull()
 })
 
 test('submitReview - unsuccessful - no review provided', () => {
@@ -132,6 +135,7 @@ test('submitReview - unsuccessful - no review provided', () => {
 
     //Assert
     expect(spy).not.toHaveBeenCalled()
+    expect(wrapper.vm.apiResponseInfo).toBeNull()
 })
 
 test('submitReview - unsuccessful - no date watched provided', () => {
@@ -153,6 +157,7 @@ test('submitReview - unsuccessful - no date watched provided', () => {
 
     //Assert
     expect(spy).not.toHaveBeenCalled()
+    expect(wrapper.vm.apiResponseInfo).toBeNull()
 })
 
 test('submitReview - unsuccessful - no rating provided', () => {
@@ -175,6 +180,7 @@ test('submitReview - unsuccessful - no rating provided', () => {
 
     //Assert
     expect(spy).not.toHaveBeenCalled()
+    expect(wrapper.vm.apiResponseInfo).toBeNull()
 })
 
 // Global way to do this? 

@@ -64,7 +64,11 @@
         </form>
 
         <!-- Modal -->
-        <ErrorDialog v-show="isModalVisible" @close="closeModal" header="Test new header CMC" />
+        <DialogComponent v-show="isModalVisible" @close="closeModal" header="Test new header CMC">
+            <template v-slot:body>
+                {{ apiResponseInfo }}
+            </template>
+        </DialogComponent>
     </div>
 </template>
   
@@ -74,7 +78,7 @@ import {
     required,
 } from 'vuelidate/lib/validators'
 import { AddCharacterReview } from '../services/review.service';
-import ErrorDialog from '@/components/ErrorDialog.vue';
+import DialogComponent from '@/components/DialogComponent.vue';
 
 export default {
     props: {
@@ -82,7 +86,7 @@ export default {
     },
     mixins: [validationMixin],
     components: {
-        ErrorDialog
+        DialogComponent
     },
     data: () => ({
         form: {
@@ -93,7 +97,8 @@ export default {
         },
         userSaved: false,
         sending: false,
-        isModalVisible: false
+        isModalVisible: false,
+        apiResponseInfo: null
     }),
     validations: {
         form: {
@@ -131,10 +136,10 @@ export default {
         async submit() {
             await AddCharacterReview(this.form.name, this.form.dateWatched,
                 this.form.review, this.form.rating).then(() => {
-                    this.showModal()
+                    this.showModal('Review successfully added!')
                     this.clearForm()
                 }).catch(() => {
-                    this.showModal()
+                    this.showModal("Error submitting character review...")
                 })
         },
         clearForm() {
@@ -144,7 +149,8 @@ export default {
             this.form.review = null
             this.form.dateWatched = null
         },
-        showModal() {
+        showModal(modalBody) {
+            this.apiResponseInfo = modalBody
             this.isModalVisible = true;
         },
         closeModal() {

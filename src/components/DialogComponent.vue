@@ -3,9 +3,7 @@
         <div class="modal-backdrop">
             <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
                 <header class="modal-header" id="modalTitle">
-                    <slot name="header">
-                        This is the default tile!
-                    </slot>
+                    Info:
                     <button type="button" class="btn-close" @click="close" aria-label="Close modal">
                         x
                     </button>
@@ -16,15 +14,6 @@
                         This is the default body!
                     </slot>
                 </section>
-
-                <footer class="modal-footer">
-                    <slot name="footer">
-                        This is the default footer!
-                    </slot>
-                    <button type="button" class="btn-green" @click="close" aria-label="Close modal">
-                        Dismiss
-                    </button>
-                </footer>
             </div>
         </div>
     </transition>
@@ -32,7 +21,7 @@
   
 <script>
 export default {
-    name: 'ErrorDialog',
+    name: 'DialogComponent',
     methods: {
         close() {
             this.$emit('close');
@@ -64,21 +53,12 @@ export default {
 }
 
 .modal-header,
-.modal-footer {
-    padding: 15px;
-    display: flex;
-}
 
 .modal-header {
     position: relative;
     border-bottom: 1px solid #eeeeee;
     color: #4AAE9B;
     justify-content: space-between;
-}
-
-.modal-footer {
-    border-top: 1px solid #eeeeee;
-    flex-direction: column;
 }
 
 .modal-body {
