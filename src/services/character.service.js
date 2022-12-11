@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BREAKING_BAD_CHARACTERS_ENDPOINT = 'https://breakingbadapi.com/api/characters/'
+const STAR_WARS_CHARACTERS_ENDPOINT = 'https://swapi.dev/api/people/'
 
 /**
  * Return a list of all characters
@@ -8,7 +8,7 @@ const BREAKING_BAD_CHARACTERS_ENDPOINT = 'https://breakingbadapi.com/api/charact
 export async function GetAllCharacters() {
     let allCharacters = [];
     await axios
-        .get(BREAKING_BAD_CHARACTERS_ENDPOINT)
+        .get(STAR_WARS_CHARACTERS_ENDPOINT)
         .then(response => {
             allCharacters = response.data
         })
@@ -26,11 +26,10 @@ export async function GetAllCharacters() {
 export async function GetCharacterByID(id) {
     let character;
     await axios
-        .get(BREAKING_BAD_CHARACTERS_ENDPOINT + id)
+        .get(STAR_WARS_CHARACTERS_ENDPOINT + id)
         .then(response => {
-            character = response.data[0]
+            character = response.data
         })
         .catch(err => err)
-
     return character;
 }
