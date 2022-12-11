@@ -1,13 +1,31 @@
 import { MOCK_CHARACTER } from '../__mocks__/character'
 import { shallowMount } from '@vue/test-utils'
 import CharacterDetails from '@/components/CharacterDetails.vue'
+import * as CharacterService from '@/services/character.service'
 
-jest.spyOn(CharacterDetails.methods, 'getCharacterByID').mockResolvedValue(MOCK_CHARACTER)
+test('stores character ID when passed into props', async() => {
+    //Arrange
+    var spy = jest.spyOn(CharacterService, 'GetCharacterByID')
+        .mockResolvedValue(MOCK_CHARACTER)
 
-test('stores character ID when passed into props', () => {
     const characterId = "123"
+
+    const $route = {
+        fullPath: 'full/path',
+        params: {
+            id: characterId
+        }
+    }
+
+    //Act
     const wrapper = shallowMount(CharacterDetails, {
-        propsData: { characterId }
+        mocks: {
+            $route
+        }
     })
-    expect(wrapper.props('characterId')).toMatch(characterId)
+
+    //Assert
+    expect(wrapper.vm.characterId).toEqual(characterId)
+    expect(spy).toHaveBeenCalledTimes(1)
+    expect(spy).toHaveBeenCalledWith("123")
 })

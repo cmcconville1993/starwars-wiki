@@ -17,17 +17,16 @@ test('Returns a list of all characters from API', async () => {
     })
 
     expect(axios.get).toHaveBeenCalledTimes(1)
-    expect(axios.get).toHaveBeenCalledWith('https://breakingbadapi.com/api/characters/')
+    expect(axios.get).toHaveBeenCalledWith('https://swapi.dev/api/people/')
 })
 
 test('Return character by ID from API', async () => {
     jest.spyOn(axios, 'get').mockResolvedValue({ status: 201, data: MOCK_CHARACTER })
 
     await GetCharacterByID(1).then(response => {
-        expect(response.id).toEqual(1)
         expect(response.name).toContain('test-name-1')
     })
 
     expect(axios.get).toHaveBeenCalledTimes(1)
-    expect(axios.get).toHaveBeenCalledWith('https://breakingbadapi.com/api/characters/1')
+    expect(axios.get).toHaveBeenCalledWith('https://swapi.dev/api/people/1')
 })

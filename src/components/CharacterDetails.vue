@@ -1,7 +1,12 @@
 <template>
-    <div>
-        <img v-bind:src="info.img" />
-        <div>{{ info.name }}</div>
+    <div id="character-details-container">
+        <div><b>Name: </b>{{ info.name }}</div>
+        <div><b>Birth year: </b>{{ info.birth_year }}</div>
+        <div><b>Gender: </b>{{ info.gender }}</div>
+        <div><b>Hair Colour: </b>{{ info.hair_color }}</div>
+        <div><b>Height: </b>{{ info.height }}</div>
+        <div><b>Skin Colour: </b>{{ info.skin_color }}</div>
+        <div><b>Mass: </b>{{ info.mass }}</div>
     </div>
 </template>
   
@@ -11,18 +16,18 @@ import { GetCharacterByID } from '../services/character.service';
 
 
 export default {
-    props: {
-        characterId: String
-    },
-    data() {
-        return {
-            info: this.getCharacterByID()
-        }
-    },
+    data: () => ({
+        info: Object,
+        characterId: null
+    }),
     methods: {
-        getCharacterByID() {
-            return GetCharacterByID(this.characterId);
+        async getCharacterByID() {
+            this.info = await GetCharacterByID(this.characterId);
         }
+    },
+    async mounted() {
+        this.characterId = this.$route.params.id
+        await this.getCharacterByID()
     }
 }
 </script>
@@ -45,6 +50,12 @@ li {
 
 a {
     color: #42b983;
+}
+
+
+#character-details-container {
+    text-align: start;
+    margin: 15px;
 }
 </style>
   

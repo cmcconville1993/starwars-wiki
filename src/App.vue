@@ -1,16 +1,20 @@
 <template>
   <div id="app">
-    <CharacterDetails msg="Welcome to Your Vue.js App" />
+    <h2>Star Wars WIKI</h2>
+    <p>
+      <router-link to="/">Character List</router-link>
+      <!-- <router-link to="/character-details/2">Liked characters</router-link> -->
+    </p>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import CharacterDetails from './components/CharacterDetails.vue'
 
 export default {
   name: 'App',
   components: {
-    CharacterDetails
+
   }
 }
 </script>
