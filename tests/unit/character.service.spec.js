@@ -24,7 +24,6 @@ test('Return character by ID from API', async () => {
     jest.spyOn(axios, 'get').mockResolvedValue({ status: 201, data: MOCK_CHARACTER })
 
     await GetCharacterByID(1).then(response => {
-        // expect(response.id).toEqual(1)
         expect(response.name).toContain('test-name-1')
     })
 
