@@ -53,7 +53,7 @@ export default {
         async getCharacterByID() {
             let character = await GetCharacterByID(this.characterId);
             if (character == null) {
-                console.log('Navigate from here to /')
+                console.log('Navigate from here to / --> (GITHUB ISSUE #12)')
                 return
             }
 
