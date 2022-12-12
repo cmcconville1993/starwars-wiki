@@ -11,23 +11,30 @@
 </template>
   
 <script>
-
-import { GetCharacterByID } from '../services/character.service';
-
+import { GetCharacterByID } from '@/services/character.service';
 
 export default {
     data: () => ({
         info: Object,
-        characterId: null
+        characterId: null,
+        page: null
     }),
     methods: {
         async getCharacterByID() {
-            this.info = await GetCharacterByID(this.characterId);
+            let character = await GetCharacterByID(this.characterId);
+            if (character == null) {
+                return
+            }
+
+            this.info = character
+
         }
     },
-    async mounted() {
+    mounted() {
         this.characterId = this.$route.params.id
-        await this.getCharacterByID()
+        this.page = this.$route.params.page
+
+        this.getCharacterByID(this.characterId)
     }
 }
 </script>

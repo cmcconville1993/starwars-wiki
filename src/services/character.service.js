@@ -5,12 +5,12 @@ const STAR_WARS_CHARACTERS_ENDPOINT = 'https://swapi.dev/api/people/'
 /**
  * Return a list of all characters
  */
-export async function GetAllCharacters() {
+export async function GetAllCharacters(page) {
     let allCharacters = [];
     await axios
-        .get(STAR_WARS_CHARACTERS_ENDPOINT)
+        .get(STAR_WARS_CHARACTERS_ENDPOINT + '?page=' + page)
         .then(response => {
-            allCharacters = response.data
+            allCharacters = response.data.results
         })
         .catch(err => err)
 
