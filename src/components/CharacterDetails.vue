@@ -61,7 +61,6 @@ export default {
 
         },
         async getCharacterFilmTitles() {
-            console.log(this.info.films)
             let titles = []
             for (const film of this.info.films) {
                 var id = film.substring(film.length - 2, film.length - 1)

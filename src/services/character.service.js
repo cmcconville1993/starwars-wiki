@@ -10,7 +10,11 @@ export async function GetAllCharacters(page) {
     await axios
         .get(STAR_WARS_CHARACTERS_ENDPOINT + '?page=' + page)
         .then(response => {
-            allCharacters = response.data.results
+            response.data.results.forEach(char => {
+                char["id"] = char.url.split('/')[5]
+
+                allCharacters.push(char)
+            });
         })
         .catch(err => err)
 

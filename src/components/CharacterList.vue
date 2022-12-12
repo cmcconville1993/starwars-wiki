@@ -1,8 +1,8 @@
 <template>
     <div>
-        <li v-for="(character, index) in characterList" :key="character.name">
-            <router-link :to="{ name: 'characterDetails', params: { id: (character.ID)} }">
-                {{ character.name }} {{(pageNumber-1)}} {{ (index + 1) }}
+        <li v-for="character in characterList" :key="character.name">
+            <router-link :to="{ name: 'characterDetails', params: { id: (character.id) } }">
+                {{ character.name }}
             </router-link>
         </li>
         <div id="navigation-buttons">
