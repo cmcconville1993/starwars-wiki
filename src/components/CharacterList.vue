@@ -1,13 +1,15 @@
 <template>
     <div>
-        <li v-for="character in characterList" :key="character.name">
-            <router-link :to="{ name: 'characterDetails', params: { id: (character.id) } }">
-                {{ character.name }}
-            </router-link>
-        </li>
+        <div id="character-list-container">
+            <li v-for="character in characterList" :key="character.name">
+                <router-link :to="{ name: 'characterDetails', params: { id: (character.id) } }">
+                    {{ character.name }}
+                </router-link>
+            </li>
+        </div>
         <div id="navigation-buttons">
-            <md-button @click="previousPage">Previous</md-button>
-            <md-button @click="nextPage">Next</md-button>
+            <md-button v-if="(pageNumber!=1)" @click="previousPage">Previous</md-button>
+            <md-button v-if="(pageNumber!=9)" @click="nextPage">Next</md-button>
         </div>
     </div>
 </template>
@@ -65,6 +67,12 @@ a {
     left: 100px;
     height: 200px;
     width: 500px;
+}
+
+#character-list-container {
+    margin: auto;
+    width: 80%;
+    padding: 10px;
 }
 </style>
   

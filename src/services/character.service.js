@@ -12,7 +12,6 @@ export async function GetAllCharacters(page) {
         .then(response => {
             response.data.results.forEach(char => {
                 char["id"] = char.url.split('/')[5]
-
                 allCharacters.push(char)
             });
         })
@@ -34,6 +33,5 @@ export async function GetCharacterByID(id) {
         .then(response => {
             character = response.data
         })
-        .catch(err => err)
     return character;
 }

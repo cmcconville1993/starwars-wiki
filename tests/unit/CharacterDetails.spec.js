@@ -1,5 +1,5 @@
 import { MOCK_CHARACTER } from '../__mocks__/character'
-import { mount, shallowMount } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import CharacterDetails from '@/components/CharacterDetails.vue'
 import * as CharacterService from '@/services/character.service'
 import * as FilmService from '@/services/film.service'
@@ -51,7 +51,7 @@ test('stores film titles for character from film API', async () => {
     }
 
     //Act
-    const wrapper = mount(CharacterDetails, {
+    const wrapper = shallowMount(CharacterDetails, {
         mocks: {
             $route
         }
@@ -62,9 +62,6 @@ test('stores film titles for character from film API', async () => {
     expect(characterSvcSpy).toHaveBeenCalledTimes(1)
     expect(characterSvcSpy).toHaveBeenCalledWith("123")
 
-    console.log(wrapper.vm.films)
-    expect(wrapper.vm.films.lenght).toEqual(4)
-    // expect(wrapper.vm.info.films.lenght).toEqual(4)
     expect(filmSvcSpy).toHaveBeenCalledTimes(4)
     expect(filmSvcSpy).toHaveBeenCalledWith("2")
     expect(filmSvcSpy).toHaveBeenCalledWith("4")

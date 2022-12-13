@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons" />
 <template>
-    <div>
+    <div id="review-form-container">
         <form novalidate class="md-layout" @submit.prevent="validateAndSubmit">
             <md-card-content>
                 <md-card-header>
@@ -162,6 +162,8 @@ export default {
 </script>
 
 <style scoped>
-
+#review-form-container{
+    align-items: flex-end;
+}
 </style>
   

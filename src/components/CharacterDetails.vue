@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="info">
         <div id="character-details-container">
             <h3>Character Details</h3>
             <div><b>Name: </b>
@@ -28,44 +28,47 @@
             <div><b>Mass: </b>
                 <br />{{ info.mass }}
             </div>
+
+            <div v-if="films">
+                <h3>Films</h3>
+                <ul v-for="film in films" :key="film">
+                    {{ film }}
+                </ul>
+            </div>
         </div>
-        <div>
-            <h3>Films</h3>
-            <ul v-for="film in films" :key="film">
-                {{ film }}
-            </ul>
-        </div>
+
+        <ReveiwForm />
     </div>
 </template>
   
 <script>
 import { GetCharacterByID } from '@/services/character.service';
 import { GetFilmTitleByID } from '@/services/film.service';
+import ReveiwForm from '@/components/ReviewForm.vue'
 
 export default {
     data: () => ({
-        info: Object,
-        films: [],
+        info: null,
+        films: null,
         characterId: null,
         page: null
     }),
+    components: {
+        ReveiwForm
+    },
     methods: {
         async getCharacterByID() {
-            let character = await GetCharacterByID(this.characterId);
-            if (character == null) {
-                console.log('Navigate from here to / --> (GITHUB ISSUE #12)')
-                return
-            }
 
-            this.info = character
-
+            // this.info = character
+            await GetCharacterByID(this.characterId)
+                .then(res => character = res)
+            return character
         },
         async getCharacterFilmTitles() {
             let titles = []
             for (const film of this.info.films) {
                 var id = film.substring(film.length - 2, film.length - 1)
-                const filmName = await GetFilmTitleByID(id)
-                titles.push(filmName)
+                titles.push(await GetFilmTitleByID(id))
             }
             return titles
         }
@@ -73,8 +76,10 @@ export default {
     async mounted() {
         this.characterId = this.$route.params.id
         this.page = this.$route.params.page
-        await this.getCharacterByID()
-        this.films = await this.getCharacterFilmTitles()
+        this.info = await this.getCharacterByID()
+        this.getCharacterFilmTitles().then(res => {
+            this.films = res
+        })
     }
 }
 </script>
@@ -106,7 +111,6 @@ a {
 
 #character-details-container div {
     max-width: 300px;
-    display: inline-block;
     text-align: start;
     margin: 15px;
 }

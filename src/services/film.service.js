@@ -8,13 +8,14 @@ const STAR_WARS_FILMS_ENDPOINT = 'https://swapi.dev/api/films/'
  * @param {*} id 
  * @returns Title of film
  */
- export async function GetFilmTitleByID(id) {
+export async function GetFilmTitleByID(id) {
     let title;
     await axios
         .get(STAR_WARS_FILMS_ENDPOINT + id)
         .then(response => {
             title = response.data.title
         })
-        .catch(err => err)
+    // .catch(err => err)
+    // console.log(title)
     return title;
 }
