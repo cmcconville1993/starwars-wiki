@@ -1,15 +1,19 @@
 <template>
     <div>
         <div id="character-list-container">
-            <li v-for="character in characterList" :key="character.name">
-                <router-link :to="{ name: 'characterDetails', params: { id: (character.id) } }">
-                    {{ character.name }}
-                </router-link>
-            </li>
+            <div v-if="characterList">
+                <li v-for="character in characterList" :key="character.name">
+                    <router-link :to="{ name: 'characterDetails', params: { id: (character.id) } }">
+                        {{ character.name }}
+                    </router-link>
+                </li>
+            </div>
+            <md-progress-bar v-else md-mode="indeterminate"></md-progress-bar>
+
         </div>
         <div id="navigation-buttons">
-            <md-button v-if="(pageNumber!=1)" @click="previousPage">Previous</md-button>
-            <md-button v-if="(pageNumber!=9)" @click="nextPage">Next</md-button>
+            <md-button v-if="(pageNumber != 1)" @click="previousPage">Previous</md-button>
+            <md-button v-if="(pageNumber != 9)" @click="nextPage">Next</md-button>
         </div>
     </div>
 </template>
@@ -20,7 +24,7 @@ import { GetAllCharacters } from '@/services/character.service';
 export default {
     name: 'CharacterList',
     data: () => ({
-        characterList: Object,
+        characterList: null,
         pageNumber: 1
     }),
     mounted() {
@@ -31,10 +35,12 @@ export default {
             this.characterList = await GetAllCharacters(this.pageNumber)
         },
         nextPage() {
+            this.characterList = null
             this.pageNumber++
             this.getAllCharacters()
         },
         previousPage() {
+            this.characterList = null
             this.pageNumber--
             this.getAllCharacters()
         }
