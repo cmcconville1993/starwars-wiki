@@ -9,12 +9,16 @@ import Vue from 'vue'
 import VueMaterial from 'vue-material'
 Vue.use(VueMaterial)
 
+jest.spyOn(CharacterService, 'GetCharacterByID')
+    .mockResolvedValue(MOCK_CHARACTER)
+
 test('stores character ID when passed into props', async () => {
     //Arrange
+    const characterId = "123"
+
     var spy = jest.spyOn(CharacterService, 'GetCharacterByID')
         .mockResolvedValue(MOCK_CHARACTER)
 
-    const characterId = "123"
 
     const $route = {
         fullPath: 'full/path',
@@ -37,16 +41,15 @@ test('stores character ID when passed into props', async () => {
 })
 
 test('stores film titles for character from film API', async () => {
+    const characterId = "123"
+
     //Arrange
-    var characterSvcSpy = jest.spyOn(CharacterService, 'GetCharacterByID')
-        .mockResolvedValue(MOCK_CHARACTER)
     var filmSvcSpy = jest.spyOn(FilmService, 'GetFilmTitleByID')
         .mockResolvedValueOnce("test-film-1")
         .mockResolvedValueOnce("test-film-2")
         .mockResolvedValueOnce("test-film-3")
         .mockResolvedValueOnce("test-film-4")
 
-    const characterId = "123"
 
     const $route = {
         fullPath: 'full/path',
@@ -56,7 +59,7 @@ test('stores film titles for character from film API', async () => {
     }
 
     //Act
-    const wrapper = shallowMount(CharacterDetails, {
+    shallowMount(CharacterDetails, {
         mocks: {
             $route
         }
@@ -65,14 +68,9 @@ test('stores film titles for character from film API', async () => {
     await flushPromises()
 
     //Assert
-    expect(wrapper.vm.characterId).toEqual(characterId)
-    expect(characterSvcSpy).toHaveBeenCalledTimes(1)
-    expect(characterSvcSpy).toHaveBeenCalledWith("123")
-
     expect(filmSvcSpy).toHaveBeenCalledTimes(4)
     expect(filmSvcSpy).toHaveBeenCalledWith("2")
     expect(filmSvcSpy).toHaveBeenCalledWith("4")
     expect(filmSvcSpy).toHaveBeenCalledWith("6")
     expect(filmSvcSpy).toHaveBeenCalledWith("8")
-
 })
