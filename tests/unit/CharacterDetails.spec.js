@@ -3,6 +3,7 @@ import { shallowMount } from '@vue/test-utils'
 import CharacterDetails from '@/components/CharacterDetails.vue'
 import * as CharacterService from '@/services/character.service'
 import * as FilmService from '@/services/film.service'
+import flushPromises from 'flush-promises'
 
 test('stores character ID when passed into props', async () => {
     //Arrange
@@ -56,6 +57,8 @@ test('stores film titles for character from film API', async () => {
             $route
         }
     })
+
+    await flushPromises()
 
     //Assert
     expect(wrapper.vm.characterId).toEqual(characterId)
