@@ -58,6 +58,7 @@ export default {
     },
     methods: {
         async getCharacterByID() {
+            let character = null
 
             // this.info = character
             await GetCharacterByID(this.characterId)
