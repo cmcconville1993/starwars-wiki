@@ -10,11 +10,16 @@ test('Returns a list of all characters from API - Page 1', async () => {
     //Act
     await GetAllCharacters(1).then(response => {
         expect(response).toHaveLength(10)
+        expect(response[0].id).toBe('1')
         expect(response[0].name).toContain('test-name-1')
+        expect(response[1].id).toBe('2')
         expect(response[1].name).toContain('test-name-2')
+        expect(response[2].id).toBe('3')
         expect(response[2].name).toContain('test-name-3')
         //...
+        expect(response[8].id).toBe('9')
         expect(response[8].name).toContain('test-name-9')
+        expect(response[9].id).toBe('10')
         expect(response[9].name).toContain('test-name-10')
     })
 
