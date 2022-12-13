@@ -5,6 +5,10 @@ import * as CharacterService from '@/services/character.service'
 import * as FilmService from '@/services/film.service'
 import flushPromises from 'flush-promises'
 
+import Vue from 'vue'
+import VueMaterial from 'vue-material'
+Vue.use(VueMaterial)
+
 test('stores character ID when passed into props', async () => {
     //Arrange
     var spy = jest.spyOn(CharacterService, 'GetCharacterByID')

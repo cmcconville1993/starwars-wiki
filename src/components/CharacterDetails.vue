@@ -1,43 +1,45 @@
 <template>
-    <div v-if="info">
-        <div id="character-details-container">
-            <h3>Character Details</h3>
-            <div><b>Name: </b>
-                <br />
-                {{ info.name }}
-            </div>
-            <div><b>Birth year: </b>
-                <br />
-                {{ info.birth_year }}
-            </div>
-            <div><b>Gender: </b>
-                <br />
-                {{ info.gender }}
-            </div>
-            <div><b>Hair Colour: </b>
-                <br />
-                {{ info.hair_color }}
-            </div>
-            <div><b>Height: </b>
-                <br />
-                {{ info.height }}
-            </div>
-            <div><b>Skin Colour: </b>
-                <br />{{ info.skin_color }}
-            </div>
-            <div><b>Mass: </b>
-                <br />{{ info.mass }}
-            </div>
+    <div>
+        <div v-if="(info && films)">
+            <div id="character-details-container">
+                <h3>Character Details</h3>
+                <div><b>Name: </b>
+                    <br />
+                    {{ info.name }}
+                </div>
+                <div><b>Birth year: </b>
+                    <br />
+                    {{ info.birth_year }}
+                </div>
+                <div><b>Gender: </b>
+                    <br />
+                    {{ info.gender }}
+                </div>
+                <div><b>Hair Colour: </b>
+                    <br />
+                    {{ info.hair_color }}
+                </div>
+                <div><b>Height: </b>
+                    <br />
+                    {{ info.height }}
+                </div>
+                <div><b>Skin Colour: </b>
+                    <br />{{ info.skin_color }}
+                </div>
+                <div><b>Mass: </b>
+                    <br />{{ info.mass }}
+                </div>
 
-            <div v-if="films">
-                <h3>Films</h3>
-                <ul v-for="film in films" :key="film">
-                    {{ film }}
-                </ul>
+                <div>
+                    <h3>Films</h3>
+                    <ul v-for="film in films" :key="film">
+                        {{ film }}
+                    </ul>
+                </div>
             </div>
+            <ReveiwForm />
         </div>
-
-        <ReveiwForm />
+        <md-progress-bar v-else md-mode="indeterminate"></md-progress-bar>
     </div>
 </template>
   
@@ -59,8 +61,6 @@ export default {
     methods: {
         async getCharacterByID() {
             let character = null
-
-            // this.info = character
             await GetCharacterByID(this.characterId)
                 .then(res => character = res)
             return character
@@ -69,7 +69,9 @@ export default {
             let titles = []
             for (const film of this.info.films) {
                 var id = film.substring(film.length - 2, film.length - 1)
-                titles.push(await GetFilmTitleByID(id))
+                await GetFilmTitleByID(id).then(res => {
+                    titles.push(res)
+                })
             }
             return titles
         }
@@ -78,9 +80,7 @@ export default {
         this.characterId = this.$route.params.id
         this.page = this.$route.params.page
         this.info = await this.getCharacterByID()
-        this.getCharacterFilmTitles().then(res => {
-            this.films = res
-        })
+        this.films = await this.getCharacterFilmTitles()
     }
 }
 </script>
