@@ -162,7 +162,7 @@ export default {
 </script>
 
 <style scoped>
-#review-form-container{
+#review-form-container {
     align-items: flex-end;
 }
 </style>
