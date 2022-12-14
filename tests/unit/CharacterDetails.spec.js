@@ -19,7 +19,6 @@ test('stores character ID when passed into props', async () => {
     var spy = jest.spyOn(CharacterService, 'GetCharacterByID')
         .mockResolvedValue(MOCK_CHARACTER)
 
-
     const $route = {
         fullPath: 'full/path',
         params: {
