@@ -5,12 +5,15 @@ const STAR_WARS_CHARACTERS_ENDPOINT = 'https://swapi.dev/api/people/'
 /**
  * Return a list of all characters
  */
-export async function GetAllCharacters() {
+export async function GetAllCharacters(page) {
     let allCharacters = [];
     await axios
-        .get(STAR_WARS_CHARACTERS_ENDPOINT)
+        .get(STAR_WARS_CHARACTERS_ENDPOINT + '?page=' + page)
         .then(response => {
-            allCharacters = response.data
+            response.data.results.forEach(char => {
+                char["id"] = char.url.split('/')[5]
+                allCharacters.push(char)
+            });
         })
         .catch(err => err)
 
@@ -30,6 +33,5 @@ export async function GetCharacterByID(id) {
         .then(response => {
             character = response.data
         })
-        .catch(err => err)
     return character;
 }

@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import CharacterDetails from '@/components/CharacterDetails.vue'
 import CharacterList from '@/components/CharacterList.vue'
 import ReviewForm from '@/components/ReviewForm.vue'
+import PageNotFound from '@/components/PageNotFound.vue'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
 
@@ -16,12 +17,15 @@ Vue.use(VueRouter)
 
 const routes = [
   { path: '/', component: CharacterList },
-  { path: '/character-details/:id', component: CharacterDetails },
-  { path: '/character-review/:id', component: ReviewForm }
+  { path: '/character-details/:id', component: CharacterDetails, name: 'characterDetails' },
+  { path: '/character-review/:id', component: ReviewForm },
+  {
+    path: '/:catchAll(.*)*', name: "PageNotFound", component: PageNotFound,
+  },
 ]
 
 const router = new VueRouter({
-    routes
+  routes
 })
 
 // Required, VueMaterials bug
