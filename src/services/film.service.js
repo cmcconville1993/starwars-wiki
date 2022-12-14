@@ -15,7 +15,5 @@ export async function GetFilmTitleByID(id) {
         .then(response => {
             title = response.data.title
         })
-    // .catch(err => err)
-    // console.log(title)
     return title;
 }
