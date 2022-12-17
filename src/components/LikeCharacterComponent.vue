@@ -11,14 +11,32 @@
 </template>
   
 <script>
+import { IsCharacterLiked, LikeCharacter, UnlikeCharacter } from '@/services/like-character.service';
+
 export default {
     name: 'LikeCharacterComponent',
+    props: {
+        characterId: null
+    },
     data: () => ({
         liked: false
     }),
+    mounted() {
+        this.IsCharacterLiked()
+    },
     methods: {
-        ToggleLikedCharacter(){
+        ToggleLikedCharacter() {
             this.liked = !this.liked
+
+            if (this.liked) {
+                LikeCharacter(this.characterId)
+            } else {
+                UnlikeCharacter(this.characterId)
+            }
+
+        },
+        IsCharacterLiked() {
+            this.liked = IsCharacterLiked()
         }
     }
 }
