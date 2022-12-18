@@ -1,7 +1,31 @@
-export const MOCK_CHARACTER =
+export const MOCK_CHARACTER_1 =
 {
     name: 'test-name-1', birth_year: 'test-birth-year-1', gender: 'test-gender-1',
     hair_color: 'test-hair-color-1', height: 'test-height-1', skin_color: 'test-skin-colour-1', portramassyed: 'test-mass-1',
+    films: [
+        "https://swapi.dev/api/films/2/",
+        "https://swapi.dev/api/films/4/",
+        "https://swapi.dev/api/films/6/",
+        "https://swapi.dev/api/films/8/"
+    ]
+};
+
+export const MOCK_CHARACTER_2 =
+{
+    name: 'test-name-2', birth_year: 'test-birth-year-2', gender: 'test-gender-2',
+    hair_color: 'test-hair-color-2', height: 'test-height-2', skin_color: 'test-skin-colour-2', portramassyed: 'test-mass-2',
+    films: [
+        "https://swapi.dev/api/films/2/",
+        "https://swapi.dev/api/films/4/",
+        "https://swapi.dev/api/films/6/",
+        "https://swapi.dev/api/films/8/"
+    ]
+};
+
+export const MOCK_CHARACTER_3 =
+{
+    name: 'test-name-3', birth_year: 'test-birth-year-3', gender: 'test-gender-3',
+    hair_color: 'test-hair-color-3', height: 'test-height-3', skin_color: 'test-skin-colour-3', portramassyed: 'test-mass-3',
     films: [
         "https://swapi.dev/api/films/2/",
         "https://swapi.dev/api/films/4/",

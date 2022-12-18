@@ -8,6 +8,7 @@ import ReviewForm from '@/components/ReviewForm.vue'
 import PageNotFound from '@/components/PageNotFound.vue'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
+import LikedCharacterListVue from './components/LikedCharacterList.vue'
 
 
 Vue.config.productionTip = false
@@ -19,6 +20,7 @@ const routes = [
   { path: '/', component: CharacterList },
   { path: '/character-details/:id', component: CharacterDetails, name: 'characterDetails' },
   { path: '/character-review/:id', component: ReviewForm },
+  { path: '/liked-characters', component: LikedCharacterListVue },
   {
     path: '/:catchAll(.*)*', name: "PageNotFound", component: PageNotFound,
   },

@@ -37,7 +37,8 @@
                     </ul>
                 </div>
             </div>
-            <ReveiwForm />
+            <ReveiwForm v-bind:character-id="characterId" />
+            <LikeCharacterComponent v-bind:character-id="characterId" />
         </div>
         <md-progress-bar v-else md-mode="indeterminate"></md-progress-bar>
     </div>
@@ -47,6 +48,7 @@
 import { GetCharacterByID } from '@/services/character.service';
 import { GetFilmTitleByID } from '@/services/film.service';
 import ReveiwForm from '@/components/ReviewForm.vue'
+import LikeCharacterComponent from '@/components/LikeCharacterComponent.vue'
 
 export default {
     data: () => ({
@@ -56,7 +58,8 @@ export default {
         page: null
     }),
     components: {
-        ReveiwForm
+        ReveiwForm,
+        LikeCharacterComponent
     },
     methods: {
         async getCharacterByID() {

@@ -3,7 +3,7 @@
     <h2>Star Wars WIKI</h2>
     <p>
       <router-link to="/">Character List</router-link>
-      <!-- <router-link to="/character-details/2">Liked characters</router-link> -->
+      <router-link to="/liked-characters">Liked characters</router-link>
     </p>
     <router-view></router-view>
   </div>
