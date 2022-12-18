@@ -17,8 +17,6 @@ test('Like character', () => {
     //Act
     wrapper.vm.ToggleLikedCharacter()
 
-    // await flushPromises()
-
     //Assert
     expect(spy).toHaveBeenCalledTimes(1)
     expect(spy).toHaveBeenCalledWith(123)
