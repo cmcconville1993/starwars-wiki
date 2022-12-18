@@ -69,7 +69,7 @@ test('Goes to previous page', async () => {
     expect(wrapper.vm.pageNumber).toBe(7)
 })
 
-test('Retrieve list of liked characters', () => {
+test('Retrieve list of liked characters', async () => {
     jest.spyOn(CharacterService, 'GetAllCharacters')
         .mockResolvedValue(MOCK_CHARACTER_LIST_PAGE_1)
 
@@ -82,6 +82,8 @@ test('Retrieve list of liked characters', () => {
 
     })
 
+    await flushPromises()
+
     //Assert
-    expect()
+    expect(wrapper.vm.characterList).toBe(MOCK_CHARACTER_LIST_PAGE_1)
 })
