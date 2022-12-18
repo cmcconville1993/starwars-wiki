@@ -68,3 +68,20 @@ test('Goes to previous page', async () => {
     expect(spy).toHaveBeenCalledWith(7)
     expect(wrapper.vm.pageNumber).toBe(7)
 })
+
+test('Retrieve list of liked characters', () => {
+    jest.spyOn(CharacterService, 'GetAllCharacters')
+        .mockResolvedValue(MOCK_CHARACTER_LIST_PAGE_1)
+
+    //Act
+    let wrapper = mount(CharacterList, {
+        stubs: ['router-link'],
+        data: () => ({
+            pageNumber: 8
+        })
+
+    })
+
+    //Assert
+    expect()
+})

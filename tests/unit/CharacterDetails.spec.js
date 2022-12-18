@@ -1,4 +1,4 @@
-import { MOCK_CHARACTER } from '../__mocks__/character'
+import { MOCK_CHARACTER_1 } from '../__mocks__/character'
 import { shallowMount } from '@vue/test-utils'
 import CharacterDetails from '@/components/CharacterDetails.vue'
 import * as CharacterService from '@/services/character.service'
@@ -10,14 +10,14 @@ import VueMaterial from 'vue-material'
 Vue.use(VueMaterial)
 
 jest.spyOn(CharacterService, 'GetCharacterByID')
-    .mockResolvedValue(MOCK_CHARACTER)
+    .mockResolvedValue(MOCK_CHARACTER_1)
 
 test('stores character ID when passed into props', async () => {
     //Arrange
     const characterId = "123"
 
     var spy = jest.spyOn(CharacterService, 'GetCharacterByID')
-        .mockResolvedValue(MOCK_CHARACTER)
+        .mockResolvedValue(MOCK_CHARACTER_1)
 
     const $route = {
         fullPath: 'full/path',

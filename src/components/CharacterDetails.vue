@@ -37,8 +37,8 @@
                     </ul>
                 </div>
             </div>
-            <ReveiwForm />
-            <LikeCharacterComponent />
+            <ReveiwForm v-bind:character-id="characterId" />
+            <LikeCharacterComponent v-bind:character-id="characterId" />
         </div>
         <md-progress-bar v-else md-mode="indeterminate"></md-progress-bar>
     </div>

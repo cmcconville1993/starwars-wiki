@@ -1,12 +1,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
 <template>
     <div id="nav-container" v-bind:class="{ pushed: liked }">
-        <div class="toggle-icon">
+        <div class="toggle-icon" @click="ToggleLikedCharacter()">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
         </div>
-        <button @click="ToggleLikedCharacter()">LIKE</button>
+        <div id="like_status">
+            <div v-if="liked">UNLIKE</div>
+            <div v-if="!liked">LIKE</div>
+        </div>
     </div>
 </template>
   
@@ -36,7 +39,7 @@ export default {
 
         },
         IsCharacterLiked() {
-            this.liked = IsCharacterLiked()
+            this.liked = IsCharacterLiked(this.characterId)
         }
     }
 }
