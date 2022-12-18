@@ -16,7 +16,6 @@
 </template>
   
 <script>
-// import { GetAllCharacters } from '@/services/character.service';
 import { GetAllLikedCharacters } from '@/services/like-character.service';
 
 export default {
