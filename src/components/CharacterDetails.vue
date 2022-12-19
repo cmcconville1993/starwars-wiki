@@ -1,33 +1,25 @@
 <template>
     <div>
         <div v-if="(info && films)">
-            <div id="character-details-container">
-                <h3>Character Details</h3>
-                <div><b>Name: </b>
-                    <br />
-                    {{ info.name }}
-                </div>
-                <div><b>Birth year: </b>
-                    <br />
-                    {{ info.birth_year }}
-                </div>
-                <div><b>Gender: </b>
-                    <br />
-                    {{ info.gender }}
-                </div>
-                <div><b>Hair Colour: </b>
-                    <br />
-                    {{ info.hair_color }}
-                </div>
-                <div><b>Height: </b>
-                    <br />
-                    {{ info.height }}
-                </div>
-                <div><b>Skin Colour: </b>
-                    <br />{{ info.skin_color }}
-                </div>
-                <div><b>Mass: </b>
-                    <br />{{ info.mass }}
+            <h2>{{ info.name }}</h2>
+            <div class="character-details-container">
+                <div style="overflow-x:auto;">
+                    <table>
+                        <th>Birth Year</th>
+                        <th>Gender</th>
+                        <th>Hair Colour</th>
+                        <th>Height</th>
+                        <th>Skin Colour</th>
+                        <th>Mass</th>
+                        <tr>
+                            <td>{{ info.birth_year }}</td>
+                            <td>{{ info.gender }}</td>
+                            <td>{{ info.hair_color }}</td>
+                            <td>{{ info.height }}</td>
+                            <td>{{ info.skin_color }}</td>
+                            <td>{{ info.mass }}</td>
+                        </tr>
+                    </table>
                 </div>
 
                 <div>
@@ -37,7 +29,12 @@
                     </ul>
                 </div>
             </div>
-            <ReveiwForm v-bind:character-id="characterId" />
+
+            <details>
+                <summary>Leave chracter feedback</summary>
+                <ReveiwForm v-bind:character-id="characterId" />
+            </details>
+
             <LikeCharacterComponent v-bind:character-id="characterId" />
         </div>
         <md-progress-bar v-else md-mode="indeterminate"></md-progress-bar>
@@ -94,23 +91,8 @@ h3 {
     margin: 40px 0 0;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    display: inline-block;
-    margin: 0 10px;
-}
-
-a {
-    color: #42b983;
-}
-
-
-#character-details-container {
-    vertical-align: middle;
+.character-details-container {
+    margin: 35px
 }
 
 #character-details-container div {
@@ -119,10 +101,8 @@ a {
     margin: 15px;
 }
 
-#character-film-container {
-    text-align: start;
-    margin: 15px;
-    width: auto;
+table {
+    width: 100%;
 }
 </style>
   
