@@ -67,7 +67,18 @@ li {
 }
 
 a {
-  color: #42b983;
+  color: #42b983 !important;
+  margin: 5px !important;
+}
+
+button {
+  margin: 15px;
+}
+
+.router-link-exact-active {
+  color: #381010 !important;
+  margin: 10px;
+  text-decoration: solid !important;
 }
 
 table th {
