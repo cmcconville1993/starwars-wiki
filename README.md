@@ -1,4 +1,4 @@
-# breakingbad-wiki
+# starwars-wiki
 
 ## Project setup
 ```
