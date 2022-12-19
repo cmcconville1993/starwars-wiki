@@ -1,7 +1,7 @@
 import { IsCharacterLiked, LikeCharacter, GetAllLikedCharacters, UnlikeCharacter } from '@/services/like-character.service'
 import * as LocalStorageService from '@/services/localStorage.service'
 import * as CharacterService from '@/services/character.service'
-import { MOCK_CHARACTER_1, MOCK_CHARACTER_LIST_PAGE_1 } from '../__mocks__/character'
+import { MOCK_CHARACTER_1, MOCK_CHARACTER_LIST_PAGE_1 } from '../../__mocks__/character'
 import { Character } from '@/models/Character'
 
 test('Like character', async () => {

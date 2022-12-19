@@ -1,4 +1,4 @@
-import { MOCK_CHARACTER_LIST_PAGE_1 } from '../__mocks__/character'
+import { MOCK_CHARACTER_LIST_PAGE_1 } from '../../__mocks__/character'
 import { mount, shallowMount, createLocalVue } from '@vue/test-utils'
 import CharacterList from '@/components/CharacterList.vue'
 import * as CharacterService from '@/services/character.service'

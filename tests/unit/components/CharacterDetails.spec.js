@@ -1,4 +1,4 @@
-import { MOCK_CHARACTER_1 } from '../__mocks__/character'
+import { MOCK_CHARACTER_1 } from '../../__mocks__/character'
 import { shallowMount } from '@vue/test-utils'
 import CharacterDetails from '@/components/CharacterDetails.vue'
 import * as CharacterService from '@/services/character.service'

@@ -1,6 +1,6 @@
 import { GetFilmTitleByID } from '@/services/film.service';
 import axios from 'axios'
-import { MOCK_FILM } from '../__mocks__/film'
+import { MOCK_FILM } from '../../__mocks__/film'
 
 
 test('Get film title by film ID', async () => {
