@@ -52,6 +52,17 @@ Routing implemented main.js.
 
 User can navigate to the character details page with the characterId in the url
 
+```
+.../character-details/:id
+```
+
+See routes.js for more details.
+
+## 404 Page
+Catch all added to routing when non-existing route has been entered. 
+User will be redirected to a 404 page
+
+See routes.js for more details.
 
 
 
