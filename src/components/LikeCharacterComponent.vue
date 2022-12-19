@@ -56,9 +56,10 @@ body {
 
 #nav-container {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 50px;
+    right: 10%;
     margin: -3em;
+    min-width: 100px
 }
 
 /*toggle-icon*/
@@ -78,8 +79,9 @@ body {
     width: 3.8em;
     height: 0.2em;
     margin: 0.9em;
-    border-right: 2.8em solid #fff;
-    border-left: 0.6em solid #d6d6d6;
+    border-right: 2.8em solid #ad7d37;
+    border-left: 0.6em solid #42b983;
+    ;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
