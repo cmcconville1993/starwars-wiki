@@ -1,6 +1,6 @@
 <template>
     <div>
-        Page :{{ currentPage }}
+        Page : {{ currentPage }}
         <div id="character-list-container">
             <div v-if="characterList">
                 <li v-for="character in characterList" :key="character.name">

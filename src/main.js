@@ -10,7 +10,7 @@ import PageNotFound from '@/components/PageNotFound.vue'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
 import LikedCharacterListVue from './components/LikedCharacterList.vue'
-
+import { store } from '@/store'
 
 Vue.config.productionTip = false
 
@@ -42,24 +42,7 @@ Vue.component('MdSelect', Vue.options.components.MdSelect.extend({
   }
 }))
 
-export const mutations = {
-  updateCurrentPage(state, n) {
-    state.currentPage = n
-  }
-}
 
-export const store = new Vuex.Store({
-  state: {
-    likedCharacters: [],
-    currentPage: 1
-  },
-  mutations: mutations,
-  getters: {
-    getPage: (state) => {
-      return state.currentPage
-    }
-  }
-});
 
 new Vue({
   router,
