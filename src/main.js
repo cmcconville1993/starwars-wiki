@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueMaterial from 'vue-material'
 import VueRouter from 'vue-router'
+import Vuex from 'vuex';
 import CharacterDetails from '@/components/CharacterDetails.vue'
 import CharacterList from '@/components/CharacterList.vue'
 import ReviewForm from '@/components/ReviewForm.vue'
@@ -15,6 +16,7 @@ Vue.config.productionTip = false
 
 Vue.use(VueMaterial)
 Vue.use(VueRouter)
+Vue.use(Vuex)
 
 const routes = [
   { path: '/', component: CharacterList },
@@ -40,7 +42,25 @@ Vue.component('MdSelect', Vue.options.components.MdSelect.extend({
   }
 }))
 
+const store = new Vuex.Store({
+  state: {
+    likedCharacters: [],
+    currentPage: 1
+  },
+  mutations: {
+    updateCurrentPage(state, n) {
+      state.currentPage = n
+    }
+  },
+  getters: {
+    getPage: (state) => {
+      return state.currentPage
+    }
+  }
+});
+
 new Vue({
   router,
   render: h => h(App),
+  store
 }).$mount('#app')
