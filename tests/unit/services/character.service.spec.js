@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { GetCharacterByID, GetAllCharacters } from '../../src/services/character.service';
-import { MOCK_CHARACTER_1, MOCK_CHARACTER_LIST_PAGE_1, MOCK_CHARACTER_LIST_PAGE_2 } from '../__mocks__/character'
+import { GetCharacterByID, GetAllCharacters } from '@/services/character.service';
+import { MOCK_CHARACTER_1, MOCK_CHARACTER_LIST_PAGE_1, MOCK_CHARACTER_LIST_PAGE_2 } from '../../__mocks__/character'
 
 
 test('Returns a list of all characters from API - Page 1', async () => {

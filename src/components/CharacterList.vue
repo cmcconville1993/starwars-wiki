@@ -1,5 +1,6 @@
 <template>
     <div>
+        Page : {{ currentPage }}
         <div id="character-list-container">
             <div v-if="characterList">
                 <li v-for="character in characterList" :key="character.name">
@@ -28,25 +29,36 @@ export default {
     name: 'CharacterList',
     data: () => ({
         characterList: null,
-        pageNumber: 1
+        pageNumber: null
     }),
     mounted() {
+        this.pageNumber = this.getCurrentPage()
         this.getAllCharacters()
+    },
+    computed: {
+        currentPage() {
+            return this.$store.getters.getPage
+        }
     },
     methods: {
         async getAllCharacters() {
             this.characterList = await GetAllCharacters(this.pageNumber)
         },
+        getCurrentPage() {
+            return this.$store.getters.getPage
+        },
         nextPage() {
             this.characterList = null
             this.pageNumber++
+            this.$store.commit('updateCurrentPage', this.pageNumber);
             this.getAllCharacters()
         },
-        previousPage() {
+        async previousPage() {
             this.characterList = null
             this.pageNumber--
+            this.$store.commit('updateCurrentPage', this.pageNumber);
             this.getAllCharacters()
-        }
+        },
     }
 }
 </script>

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { AddCharacterReview } from '../../src/services/review.service';
+import { AddCharacterReview } from '@/services/review.service';
 
 
 test('Add character reviews - successful', async () => {

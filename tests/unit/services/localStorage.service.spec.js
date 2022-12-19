@@ -1,5 +1,5 @@
 import { Write, WriteObject, Read, ReadObject, Remove, GetAllFromLocalStorage } from '@/services/localStorage.service'
-import { MOCK_CHARACTER_1, MOCK_CHARACTER_2, MOCK_CHARACTER_3 } from '../__mocks__/character'
+import { MOCK_CHARACTER_1, MOCK_CHARACTER_2, MOCK_CHARACTER_3 } from '../../__mocks__/character'
 
 test('Write to client-side storage', () => {
     //Arrange
