@@ -66,7 +66,7 @@ See routes.js for more details.
 
 
 ## Continios Integration (CI)
-Github actions used to automate test build when merging into the development branch.
+Github actions used to automate test build when merging into the development and main branches.
 
 See [Github Actions](https://github.com/cmcconville1993/breakingbad-wiki/actions) for more details
 
