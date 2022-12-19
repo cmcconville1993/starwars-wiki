@@ -32,6 +32,7 @@ export default {
         pageNumber: null
     }),
     mounted() {
+        this.pageNumber = this.getCurrentPage()
         this.getAllCharacters()
     },
     computed: {
@@ -41,8 +42,10 @@ export default {
     },
     methods: {
         async getAllCharacters() {
-            this.pageNumber = this.$store.getters.getPage
             this.characterList = await GetAllCharacters(this.pageNumber)
+        },
+        getCurrentPage() {
+            return this.$store.getters.getPage
         },
         nextPage() {
             this.characterList = null
@@ -50,12 +53,12 @@ export default {
             this.$store.commit('updateCurrentPage', this.pageNumber);
             this.getAllCharacters()
         },
-        previousPage() {
+        async previousPage() {
             this.characterList = null
             this.pageNumber--
             this.$store.commit('updateCurrentPage', this.pageNumber);
             this.getAllCharacters()
-        }
+        },
     }
 }
 </script>

@@ -42,16 +42,18 @@ Vue.component('MdSelect', Vue.options.components.MdSelect.extend({
   }
 }))
 
-const store = new Vuex.Store({
+export const mutations = {
+  updateCurrentPage(state, n) {
+    state.currentPage = n
+  }
+}
+
+export const store = new Vuex.Store({
   state: {
     likedCharacters: [],
     currentPage: 1
   },
-  mutations: {
-    updateCurrentPage(state, n) {
-      state.currentPage = n
-    }
-  },
+  mutations: mutations,
   getters: {
     getPage: (state) => {
       return state.currentPage
