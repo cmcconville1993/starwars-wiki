@@ -65,4 +65,15 @@ User will be redirected to a 404 page
 See routes.js for more details.
 
 
+## Continios Integration (CI)
+Github actions used to automate test build when merging into the development branch.
+
+See [Github Actions](https://github.com/cmcconville1993/breakingbad-wiki/actions) for more details
+
+## Tracking tasks
+Project board setup in Github to track progress
+
+See [Repo project board](https://github.com/users/cmcconville1993/projects/2/views/1) for more details
+
+
 
