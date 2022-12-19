@@ -3,9 +3,7 @@
     <div id="review-form-container">
         <form novalidate class="md-layout" @submit.prevent="validateAndSubmit">
             <md-card-content>
-                <md-card-header>
-                    <div class="md-title">Feedback</div>
-                </md-card-header>
+                <h2>Feedback</h2>
 
                 <div class="md-layout">
                     <div class="md-layout-item md-small-size-100">
@@ -20,25 +18,15 @@
                 </div>
 
                 <div class="md-layout">
-                    <md-field :class="getValidationClass('dateWatched')">
-                        <label for="dateWatched">Date watched:</label>
-                        <md-datepicker name="dateWatched" id="dateWatched" v-model="form.dateWatched"
-                            :disabled="sending" />
-                        <span class="md-error" v-if="!$v.form.dateWatched.required">Date Watched required</span>
-                    </md-field>
-                </div>
-
-                <div class="md-layout md-gutter">
-                    <div class="md-layout-item md-small-size-100">
-                        <md-field :class="getValidationClass('review')">
-                            <label for="review">Review:</label>
-                            <md-textarea name="review" id="review" v-model="form.review" :disabled="sending" />
-                            <span class="md-error" v-if="!$v.form.review.required">Review required</span>
+                    <div class="md-layout-item">
+                        <md-field :class="getValidationClass('dateWatched')">
+                            <label for="dateWatched">Date watched:</label>
+                            <md-datepicker name="dateWatched" id="dateWatched" v-model="form.dateWatched"
+                                :disabled="sending" />
+                            <span class="md-error" v-if="!$v.form.dateWatched.required">Date Watched required</span>
                         </md-field>
                     </div>
-                </div>
 
-                <div class="md-layout md-gutter">
                     <div class="md-layout-item md-small-size-100">
                         <md-field :class="getValidationClass('rating')">
                             <label for="rating">Rating:</label>
@@ -48,8 +36,23 @@
                                 <md-option value="3">3</md-option>
                                 <md-option value="4">4</md-option>
                                 <md-option value="5">5</md-option>
+                                <md-option value="6">6</md-option>
+                                <md-option value="7">7</md-option>
+                                <md-option value="8">8</md-option>
+                                <md-option value="9">9</md-option>
+                                <md-option value="10">10</md-option>
                             </md-select>
                             <span class="md-error" v-if="!$v.form.rating.required">Rating required</span>
+                        </md-field>
+                    </div>
+                </div>
+
+                <div class="md-layout md-gutter">
+                    <div class="md-layout-item md-small-size-100">
+                        <md-field :class="getValidationClass('review')">
+                            <label for="review">Review:</label>
+                            <md-textarea name="review" id="review" v-model="form.review" :disabled="sending" />
+                            <span class="md-error" v-if="!$v.form.review.required">Review required</span>
                         </md-field>
                     </div>
                 </div>
@@ -162,8 +165,8 @@ export default {
 </script>
 
 <style scoped>
-#review-form-container {
-    align-items: flex-end;
+.md-card-content {
+    width: 100%;
 }
 </style>
   
